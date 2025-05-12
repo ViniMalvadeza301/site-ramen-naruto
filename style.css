@@ -1,0 +1,90 @@
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #FF6F61;
+    flex-wrap: wrap;
+    margin-bottom: 3%;
+}
+.home{
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+    flex-wrap: wrap;
+
+}
+.container1{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10em;
+    flex-wrap: wrap;
+}
+.container2{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10em;
+    padding-top: 3em;
+    flex-wrap: wrap;
+}
+.container3{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10em;
+    padding-top: 3em;
+    flex-wrap: wrap;
+}
+.footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #E6C49F;
+    padding: 1.5em;
+    margin-top: 3em;
+    flex-wrap: wrap;
+}
+.alinharcard{
+    text-align: center;
+
+}
+.alinhardesc{
+    text-align: justify;
+}
+.bemvindo{
+    background-color: bisque;
+    text-align: justify;
+    display: flex;
+    flex-direction: row;
+    padding-left: 6em;
+    padding-right: 6em;
+    max-width: 80%;
+    margin: auto;
+    flex-wrap: wrap;
+}
+.btn.btn-secondary.dropdown-toggle{ /* Parte do usuário */
+    background: none;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    text-align: center;
+}
+.btn.btn-secondary.dropdown-toggle:focus{ /* Parte do usuário */
+    background: none;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    text-align: center;
+}
+
+.carrinho{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    padding-top: 0.5em;
+    flex-wrap: wrap;
+}

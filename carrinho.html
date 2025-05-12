@@ -3,18 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrinho</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
+    <title>Carrinho de Compras - Ichiraku's Ramen</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div>aaaa</div>
+<body onload="userLogado()">
 
+<header class="header">
+    <h1>Carrinho de Compras</h1>
+</header>
+<section>
+    <h4 style="padding-left: 500px;">Bem-vindo, <span id="bemvindo"></span>!</h4>
+</section>
+<main class="container mt-4">
+    <div id="cart-items">
+        <!-- Os itens do carrinho serão renderizados aqui -->
+    </div>
+    <div class="text-right mt-3">
+        <h4>Total: R$ <span id="total-price">0,00</span></h4>
+    </div>
+    <button id="clear-cart" class="btn btn-danger mt-3">Limpar Carrinho</button>
+    <button id="buy-cart" class="btn btn-danger mt-3">Comprar</button>
+    <button class="btn btn-danger mt-3"><a href="index.html" style="color: white;">Voltar</a></button>
+</main>
 
+<script>
+    // Função para verificar se o usuário está logado e mostrar o nome
+    comprar = document.querySelector("#buy-cart");
+    comprar.addEventListener("click", function() {
+        alert("Compra realizada com sucesso!");
+        localStorage.removeItem('cart');
+        window.location.href = "index.html";
+    });
+    function userLogado() {
+        const usuario = sessionStorage.getItem("usuario");
+        const bemvindoElement = document.querySelector("#bemvindo");
+        
+        if (usuario) {
+            bemvindoElement.innerText = usuario;
+        } else {
+            bemvindoElement.innerText = "Visitante";
+        }
+    }
 
+    // Renderização dos itens do carrinho
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    function renderCart() {
+        const cartContainer = document.getElementById('cart-items');
+        cartContainer.innerHTML = '';
+        let total = 0;
+
+        cartItems.forEach((item, index) => {
+            const itemDiv = document.createElement('div');
+            itemDiv.classList.add('card', 'mb-2');
+            itemDiv.innerHTML = `
+                <div class="card-body">
+                    <h5 class="card-title">${item.name}</h5>
+                    <p class="card-text">Preço: R$ ${item.price.toFixed(2)}</p>
+                    <p class="card-text">Quantidade: ${item.quantity}</p>
+                    <button class="btn btn-danger" onclick="removeItem(${index})">Remover</button>
+                </div>`;
+            cartContainer.appendChild(itemDiv);
+            total += item.price * item.quantity;
+        });
+
+        document.getElementById('total-price').innerText = total.toFixed(2);
+    }
+
+    function removeItem(index) {
+        cartItems.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify(cartItems));
+        renderCart();
+    }
+
+    document.getElementById('clear-cart').addEventListener('click', () => {
+        localStorage.removeItem('cart');
+        cartItems.length = 0;
+        renderCart();
+    });
+
+    renderCart();
+</script>
+
 </body>
 </html>
