@@ -23,18 +23,27 @@
         <h4>Total: R$ <span id="total-price">0,00</span></h4>
     </div>
     <button id="clear-cart" class="btn btn-danger mt-3">Limpar Carrinho</button>
-    <button id="buy-cart" class="btn btn-danger mt-3">Comprar</button>
-    <button class="btn btn-danger mt-3"><a href="index.html" style="color: white;">Voltar</a></button>
+    <button class="buy-cart btn btn-danger mt-3">Comprar no Cartão</button>
+    <button class="buy-cart btn btn-danger mt-3">Comprar no Pix</button>
+    <button class="buy-cart btn btn-danger mt-3">Comprar no Boleto</button>
+    <button class="btn btn-danger mt-3">
+    <a href="index.html" style="color: white;">Voltar</a>
+    </button>
+
 </main>
 
 <script>
-    // Função para verificar se o usuário está logado e mostrar o nome
-    comprar = document.querySelector("#buy-cart");
-    comprar.addEventListener("click", function() {
-        alert("Compra realizada com sucesso!");
-        localStorage.removeItem('cart');
-        window.location.href = "index.html";
+    // Seleciona todos os botões de compra
+    const botoesCompra = document.querySelectorAll(".buy-cart");
+
+    botoesCompra.forEach(function(botao) {
+        botao.addEventListener("click", function() {
+            alert("Compra realizada com sucesso!");
+            localStorage.removeItem('cart');
+            window.location.href = "index.html";
+        });
     });
+
     function userLogado() {
         const usuario = sessionStorage.getItem("usuario");
         const bemvindoElement = document.querySelector("#bemvindo");
@@ -62,6 +71,7 @@
                     <h5 class="card-title">${item.name}</h5>
                     <p class="card-text">Preço: R$ ${item.price.toFixed(2)}</p>
                     <p class="card-text">Quantidade: ${item.quantity}</p>
+                    <p><img src="${item.image}" alt="${item.name}" style="max-width: 100px;"></p>
                     <button class="btn btn-danger" onclick="removeItem(${index})">Remover</button>
                 </div>`;
             cartContainer.appendChild(itemDiv);
