@@ -1,5 +1,7 @@
 VINICIUS LIMA CARNEIRO
 
+O projeto foi feito seguindo uma temática do anime Naruto, mais especificamente de um dos personagens mais carismaticos do anime, Ichiraku que é uma das primeiras figuras que oferecem ajuda ao protagonista Naruto, além disso trabalha fazendo diversos tipos de ramens e vendendo por toda vila de Konoha alegrando os ninjas e o povo da vila.
+
 function banco() {
     const dados = [
         { id: 0, nome: 'vini', email: 'vini@gmail.com', senha: '123' },
